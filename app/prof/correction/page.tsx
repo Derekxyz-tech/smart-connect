@@ -73,7 +73,7 @@ export default function CorrectionPage() {
         setDevoirsOptions(devoirsData.devoirs.map((d: any) => ({ id: d.id, titre: d.titre })))
         
         // Extraire les classes uniques
-        const classes = [...new Set(devoirsData.devoirs.map((d: any) => d.classe).filter(Boolean))]
+        const classes = [...new Set(devoirsData.devoirs.map((d: any) => d.classe).filter(Boolean))] as string[]
         setClassesOptions(classes)
       }
     } catch (err) {
