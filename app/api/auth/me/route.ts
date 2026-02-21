@@ -26,7 +26,8 @@ export async function GET(request: NextRequest) {
       .eq('eleve_id', user.id)
       .single()
 
-    classeNom = eleveClasse?.classe?.nom || null
+    const classe = eleveClasse?.classe
+    classeNom = Array.isArray(classe) ? classe[0]?.nom ?? null : (classe as { nom?: string } | null)?.nom ?? null
   }
 
   return NextResponse.json({
