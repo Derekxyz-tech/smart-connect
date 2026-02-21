@@ -67,7 +67,7 @@ export default async function ParametresPage() {
                   <div>
                     <label className="block text-sm font-medium text-slate-700 mb-2">Classe</label>
                     <div className="px-4 py-2 bg-slate-50 border border-slate-200 rounded-lg text-slate-800">
-                      {eleveClasse.classe.nom}
+                      {(eleveClasse.classe as unknown as { nom?: string })?.nom}
                       {eleveClasse.section && ` - ${eleveClasse.section}`}
                     </div>
                   </div>
