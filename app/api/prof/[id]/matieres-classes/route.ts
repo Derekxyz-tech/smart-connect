@@ -42,7 +42,7 @@ export async function GET(
     return NextResponse.json({ error: classesError.message }, { status: 500 })
   }
 
-  const classes = classesData?.map((c: any) => c.classe?.nom).filter(Boolean) || []
+  const classes = classesData?.map((c: any) => (c.classe as unknown as { nom?: string } | null)?.nom).filter(Boolean) || []
 
   return NextResponse.json({ matieres, classes })
 }

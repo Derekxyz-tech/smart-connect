@@ -64,7 +64,7 @@ export async function GET(
       id: eleve.id,
       nom: eleve.nom,
       prenom: eleve.prenom,
-      classe: eleveClasse?.classe?.nom,
+      classe: (eleveClasse?.classe as unknown as { nom?: string } | null)?.nom,
     }
   })
 

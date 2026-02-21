@@ -45,7 +45,7 @@ export async function GET(
       .eq('eleve_id', user.id)
       .single()
 
-    const classeNom = eleveClasse?.classe?.nom || null
+    const classeNom = (eleveClasse?.classe as unknown as { nom?: string } | null)?.nom || null
     if (classeNom && devoir.classe !== classeNom) {
       return NextResponse.json(
         { error: 'Vous n\'êtes pas autorisé à voir ce devoir' },

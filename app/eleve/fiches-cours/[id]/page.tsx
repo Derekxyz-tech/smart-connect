@@ -27,7 +27,7 @@ export default async function FicheCoursDetailPage({ params }: { params: { id: s
     .eq('eleve_id', user.id)
     .single()
 
-  const classeNom = eleveClasse?.classe?.nom || null
+  const classeNom = (eleveClasse?.classe as unknown as { nom?: string } | null)?.nom || null
 
   const userWithPrenom = { ...user, prenom: eleveData?.prenom, classe: classeNom }
 

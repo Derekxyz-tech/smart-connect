@@ -75,7 +75,7 @@ export async function GET(request: NextRequest) {
         eleve: {
           nom: eleve.nom,
           prenom: eleve.prenom,
-          classe: eleveClasse?.classe?.nom,
+          classe: (eleveClasse?.classe as unknown as { nom?: string } | null)?.nom,
         },
         lastMessage: lastMessage || undefined,
         unreadCount: unreadCount || 0,

@@ -83,7 +83,7 @@ export async function POST(request: NextRequest) {
     .eq('eleve_id', user.id)
     .single()
 
-  const classeNom = eleveClasse?.classe?.nom || null
+  const classeNom = (eleveClasse?.classe as unknown as { nom?: string } | null)?.nom || null
   if (devoir.classe && classeNom && devoir.classe !== classeNom) {
     return NextResponse.json(
       { error: 'Vous n\'êtes pas autorisé à soumettre ce devoir' },
