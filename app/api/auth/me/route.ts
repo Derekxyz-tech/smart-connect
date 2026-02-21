@@ -27,7 +27,7 @@ export async function GET(request: NextRequest) {
       .single()
 
     const classe = eleveClasse?.classe
-    classeNom = Array.isArray(classe) ? classe[0]?.nom ?? null : (classe as { nom?: string } | null)?.nom ?? null
+    classeNom = Array.isArray(classe) ? classe[0]?.nom ?? null : (classe as unknown as { nom?: string } | null)?.nom ?? null
   }
 
   return NextResponse.json({
