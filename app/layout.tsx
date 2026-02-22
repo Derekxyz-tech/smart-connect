@@ -3,7 +3,7 @@ import './globals.css'
 import { UserProvider } from '@/components/UserProvider'
 
 export const metadata: Metadata = {
-  title: 'CodGeni Education - Plateforme Éducative',
+  title: 'Collège Saint-Michel - Plateforme Éducative',
   description: 'Plateforme éducative complète pour administrateurs, professeurs et élèves',
 }
 

@@ -299,13 +299,13 @@ export default function Sidebar({ user }: SidebarProps) {
           {userData.role === 'admin' ? (
             <>
               <h2 className="text-lg font-semibold text-white mb-1">Direction Générale</h2>
-              <p className="text-sm text-slate-300 mb-1">Institution Nouvelle Source</p>
+              <p className="text-sm text-slate-300 mb-1">Collège Saint-Michel</p>
               <p className="text-sm text-slate-400">Administrateur</p>
             </>
           ) : userData.role === 'prof' ? (
             <>
               <h2 className="text-lg font-semibold text-white mb-1">{userData.nom}</h2>
-              <p className="text-sm text-slate-300 mb-1">Institution Nouvelle Source</p>
+              <p className="text-sm text-slate-300 mb-1">Collège Saint-Michel</p>
               {matieres.length > 0 && (
                 <p className="text-sm text-slate-400">{matieres.join(' • ')}</p>
               )}
@@ -313,7 +313,7 @@ export default function Sidebar({ user }: SidebarProps) {
           ) : (
             <>
               <h2 className="text-lg font-semibold text-white mb-1">{userData.nom}</h2>
-              <p className="text-sm text-slate-300 mb-1">Institution Nouvelle Source</p>
+              <p className="text-sm text-slate-300 mb-1">Collège Saint-Michel</p>
             </>
           )}
         </div>
@@ -341,7 +341,7 @@ export default function Sidebar({ user }: SidebarProps) {
                     <path d="m22 7l-8.991 5.727a2 2 0 0 1-2.009 0L2 7"></path>
                     <rect width="20" height="16" x="2" y="4" rx="2"></rect>
                   </svg>
-                  <span className="text-sm text-slate-300">admin@ins.edu</span>
+                  <span className="text-sm text-slate-300">admin@csm.edu</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <svg
@@ -379,7 +379,7 @@ export default function Sidebar({ user }: SidebarProps) {
                     <path d="m22 7l-8.991 5.727a2 2 0 0 1-2.009 0L2 7"></path>
                     <rect width="20" height="16" x="2" y="4" rx="2"></rect>
                   </svg>
-                  <span className="text-sm text-slate-300">{(userData as any).email || 'email@ins.edu'}</span>
+                  <span className="text-sm text-slate-300">{(userData as any).email || 'email@csm.edu'}</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <svg

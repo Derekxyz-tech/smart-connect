@@ -112,7 +112,7 @@ function LoginContent() {
                 </svg>
               </div>
               <h1 className="text-2xl font-semibold text-slate-900 tracking-tight text-center">
-                CodGeni Education
+                Collège Saint-Michel
               </h1>
               <p className="text-slate-400 text-sm mt-1">Portail de connexion</p>
             </div>
