@@ -138,8 +138,14 @@ export default function EvaluationQuizPage() {
       <div className="h-screen flex overflow-hidden bg-slate-50">
         <Sidebar user={user} />
         <div className="flex-1 flex flex-col overflow-hidden">
-          <header className="bg-white border-b border-slate-200 pl-14 pr-4 md:px-8 py-4 shadow-sm z-10">
-            <Link href="/eleve/evaluations" className="text-blue-600 hover:underline">← Retour aux évaluations</Link>
+          <header className="bg-white border-b border-slate-200 h-16 flex items-center pl-14 pr-4 md:px-8 shadow-sm z-10">
+            <Link href="/eleve/evaluations" className="flex-shrink-0 p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-lg transition-colors" title="Retour">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="m12 19-7-7 7-7" /><path d="M19 12H5" />
+              </svg>
+            </Link>
+            <h2 className="text-xl font-semibold text-slate-800 tracking-tight truncate flex-1 text-center">Évaluation</h2>
+            <div className="w-9"></div>
           </header>
           <main className="flex-1 flex items-center justify-center p-8">
             <div className="bg-white rounded-xl border border-slate-200 shadow-sm p-8 text-center max-w-md">
@@ -158,8 +164,14 @@ export default function EvaluationQuizPage() {
       <div className="h-screen flex overflow-hidden bg-slate-50">
         <Sidebar user={user} />
         <div className="flex-1 flex flex-col overflow-hidden">
-          <header className="bg-white border-b border-slate-200 pl-14 pr-4 md:px-8 py-4 shadow-sm z-10">
-            <Link href="/eleve/evaluations" className="text-blue-600 hover:underline">← Retour aux évaluations</Link>
+          <header className="bg-white border-b border-slate-200 h-16 flex items-center pl-14 pr-4 md:px-8 shadow-sm z-10">
+            <Link href="/eleve/evaluations" className="flex-shrink-0 p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-lg transition-colors" title="Retour">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="m12 19-7-7 7-7" /><path d="M19 12H5" />
+              </svg>
+            </Link>
+            <h2 className="text-xl font-semibold text-slate-800 tracking-tight truncate flex-1 text-center">Évaluation</h2>
+            <div className="w-9"></div>
           </header>
           <main className="flex-1 flex items-center justify-center p-8">
             <div className="bg-white rounded-xl border border-slate-200 shadow-sm p-8 text-center max-w-md">
@@ -180,12 +192,14 @@ export default function EvaluationQuizPage() {
       <div className="h-screen flex overflow-hidden bg-slate-50">
         <Sidebar user={user} />
         <div className="flex-1 flex flex-col overflow-hidden">
-          <header className="bg-white border-b border-slate-200 pl-14 pr-4 md:px-8 py-4 shadow-sm z-10">
-            <div className="flex items-center justify-between">
-              <Link href="/eleve/evaluations" className="text-blue-600 hover:underline">← Retour aux évaluations</Link>
-              <h1 className="text-xl font-semibold text-slate-800">{quiz.titre}</h1>
-              <span className="text-sm text-slate-500">{quiz.matiere}{quiz.classe ? ` • ${quiz.classe}` : ''}</span>
-            </div>
+          <header className="bg-white border-b border-slate-200 h-16 flex items-center pl-14 pr-4 md:px-8 shadow-sm z-10">
+            <Link href="/eleve/evaluations" className="flex-shrink-0 p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-lg transition-colors" title="Retour">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="m12 19-7-7 7-7" /><path d="M19 12H5" />
+              </svg>
+            </Link>
+            <h2 className="text-xl font-semibold text-slate-800 tracking-tight truncate flex-1 text-center">{quiz.titre}</h2>
+            <div className="w-9"></div>
           </header>
           <main className="flex-1 overflow-y-auto p-4 sm:p-8">
             <div className="max-w-2xl mx-auto space-y-6">
@@ -236,12 +250,14 @@ export default function EvaluationQuizPage() {
     <div className="h-screen flex overflow-hidden bg-slate-50">
       <Sidebar user={user} />
       <div className="flex-1 flex flex-col overflow-hidden">
-        <header className="bg-white border-b border-slate-200 pl-14 pr-4 md:px-8 py-4 shadow-sm z-10">
-          <div className="flex items-center justify-between">
-            <Link href="/eleve/evaluations" className="text-blue-600 hover:underline">← Retour</Link>
-            <h1 className="text-xl font-semibold text-slate-800">{quiz.titre}</h1>
-            <span className="text-sm text-slate-500">{quiz.matiere}{quiz.classe ? ` • ${quiz.classe}` : ''}</span>
-          </div>
+        <header className="bg-white border-b border-slate-200 h-16 flex items-center pl-14 pr-4 md:px-8 shadow-sm z-10">
+          <Link href="/eleve/evaluations" className="flex-shrink-0 p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-lg transition-colors" title="Retour">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="m12 19-7-7 7-7" /><path d="M19 12H5" />
+            </svg>
+          </Link>
+          <h2 className="text-xl font-semibold text-slate-800 tracking-tight truncate flex-1 text-center">{quiz.titre}</h2>
+          <div className="w-9"></div>
         </header>
 
         <main className="flex-1 overflow-y-auto p-4 sm:p-8">

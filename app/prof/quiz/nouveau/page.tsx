@@ -257,29 +257,17 @@ export default function NouveauQuizPage() {
     <div className="h-screen flex overflow-hidden bg-slate-50">
       <Sidebar user={user} />
       <div className="flex-1 flex flex-col overflow-hidden">
-        <header className="bg-white border-b border-slate-200 pl-14 pr-4 md:px-8 py-6 shadow-sm z-10">
-          <div className="flex items-center justify-between">
-            <h1 className="text-xl font-semibold text-slate-800 tracking-tight truncate">Nouveau Quiz</h1>
-            <button
-              onClick={() => router.push('/prof/quiz')}
-              className="p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-lg transition-colors"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="M18 6 6 18"></path>
-                <path d="m6 6 12 12"></path>
-              </svg>
-            </button>
-          </div>
+        <header className="bg-white border-b border-slate-200 h-16 flex items-center relative pl-14 pr-4 md:px-8 shadow-sm z-10">
+          <h2 className="text-xl font-semibold text-slate-800 tracking-tight truncate flex-1 text-center">Nouveau Quiz</h2>
+          <button
+            onClick={() => router.push('/prof/quiz')}
+            className="flex-shrink-0 p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-lg transition-colors"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M18 6 6 18"></path>
+              <path d="m6 6 12 12"></path>
+            </svg>
+          </button>
         </header>
 
         <main className="flex-1 overflow-y-auto bg-slate-50 p-4 sm:p-8">

@@ -113,107 +113,74 @@ export default function QuizDetailPage() {
     <div className="h-screen flex overflow-hidden bg-slate-50">
       <Sidebar user={user} />
       <div className="flex-1 flex flex-col overflow-hidden">
-        <header className="bg-white border-b border-slate-200 pl-14 pr-4 md:px-8 py-6 shadow-sm z-10">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <Link
-                href="/prof/quiz"
-                className="p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-lg transition-colors"
-                title="Retour"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="m12 19-7-7 7-7"></path>
-                  <path d="M19 12H5"></path>
-                </svg>
-              </Link>
-              <div>
-                <h1 className="text-xl font-bold text-slate-900 truncate">{quiz.titre}</h1>
-                <div className="flex items-center gap-4 mt-2 text-sm text-slate-600">
-                  <span className="flex items-center gap-1.5">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6.5a1 1 0 0 1 0-5H20"></path>
-                    </svg>
-                    {quiz.matiere}
-                  </span>
-                  {quiz.classe && (
-                    <span className="flex items-center gap-1.5">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="16"
-                        height="16"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
-                        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
-                        <circle cx="9" cy="7" r="4"></circle>
-                        <path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"></path>
-                      </svg>
-                      {quiz.classe}
-                    </span>
-                  )}
-                  {quiz.duree_minutes && (
-                    <span className="flex items-center gap-1.5">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="16"
-                        height="16"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
-                        <circle cx="12" cy="12" r="10"></circle>
-                        <polyline points="12 6 12 12 16 14"></polyline>
-                      </svg>
-                      {quiz.duree_minutes} minutes
-                    </span>
-                  )}
-                  {dateFormatted && (
-                    <>
-                      <span className="text-slate-400">•</span>
-                      <span>Échéance: {dateFormatted}</span>
-                    </>
-                  )}
-                </div>
-              </div>
-            </div>
-            <Link
-              href={`/prof/quiz/${quizId}/resultats`}
-              className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors"
+        <header className="bg-white border-b border-slate-200 h-16 flex items-center pl-14 pr-4 md:px-8 shadow-sm z-10">
+          <Link
+            href="/prof/quiz"
+            className="flex-shrink-0 p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-lg transition-colors"
+            title="Retour"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             >
-              Voir résultats et corriger
-            </Link>
-          </div>
+              <path d="m12 19-7-7 7-7"></path>
+              <path d="M19 12H5"></path>
+            </svg>
+          </Link>
+          <h2 className="text-xl font-semibold text-slate-800 tracking-tight truncate flex-1 text-center">{quiz.titre}</h2>
+          <div className="w-9"></div>
         </header>
 
         <main className="flex-1 overflow-y-auto bg-slate-50 p-4 sm:p-8">
           <div className="max-w-4xl mx-auto">
+            <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
+              <div className="flex items-center gap-4 text-sm text-slate-600">
+                <span className="flex items-center gap-1.5">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6.5a1 1 0 0 1 0-5H20"></path>
+                  </svg>
+                  {quiz.matiere}
+                </span>
+                {quiz.classe && (
+                  <span className="flex items-center gap-1.5">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                      <circle cx="9" cy="7" r="4"></circle>
+                      <path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"></path>
+                    </svg>
+                    {quiz.classe}
+                  </span>
+                )}
+                {quiz.duree_minutes && (
+                  <span className="flex items-center gap-1.5">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <circle cx="12" cy="12" r="10"></circle>
+                      <polyline points="12 6 12 12 16 14"></polyline>
+                    </svg>
+                    {quiz.duree_minutes} minutes
+                  </span>
+                )}
+                {dateFormatted && (
+                  <>
+                    <span className="text-slate-400">•</span>
+                    <span>Échéance: {dateFormatted}</span>
+                  </>
+                )}
+              </div>
+              <Link
+                href={`/prof/quiz/${quizId}/resultats`}
+                className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors"
+              >
+                Voir résultats et corriger
+              </Link>
+            </div>
             <div className="bg-white rounded-xl border border-slate-200 shadow-sm p-8">
               {quiz.description && (
                 <div className="mb-6">

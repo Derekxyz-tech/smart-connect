@@ -59,32 +59,18 @@ export default async function FicheCoursDetailPage({ params }: { params: { id: s
     <div className="h-screen flex overflow-hidden bg-slate-50">
       <Sidebar user={userWithPrenom} />
       <div className="flex-1 flex flex-col overflow-hidden">
-        <header className="bg-white border-b border-slate-200 pl-14 pr-4 md:px-8 py-4 shadow-sm z-10">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <Link
-                href="/eleve/fiches-cours"
-                className="p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-lg transition-colors"
-                title="Retour"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="m12 19-7-7 7-7"></path>
-                  <path d="M19 12H5"></path>
-                </svg>
-              </Link>
-              <h2 className="text-xl font-semibold text-slate-800 truncate">Fiche de Cours</h2>
-            </div>
-          </div>
+        <header className="bg-white border-b border-slate-200 h-16 flex items-center pl-14 pr-4 md:px-8 shadow-sm z-10">
+          <Link
+            href="/eleve/fiches-cours"
+            className="flex-shrink-0 p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-lg transition-colors"
+            title="Retour"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="m12 19-7-7 7-7" /><path d="M19 12H5" />
+            </svg>
+          </Link>
+          <h2 className="text-xl font-semibold text-slate-800 tracking-tight truncate flex-1 text-center">Fiche de Cours</h2>
+          <div className="w-9"></div>
         </header>
 
         <main className="flex-1 overflow-y-auto bg-slate-50 p-4 sm:p-8">

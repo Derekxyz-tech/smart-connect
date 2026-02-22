@@ -102,24 +102,20 @@ export default function DevoirDetailPage() {
     <div className="h-screen flex overflow-hidden bg-slate-50">
       <Sidebar user={user} />
       <div className="flex-1 flex flex-col overflow-hidden">
-        <header className="bg-white border-b border-slate-200 pl-14 pr-4 md:px-8 py-4 shadow-sm z-10">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <Link
-                href="/eleve/devoirs"
-                className="p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-lg transition-colors"
-                title="Retour"
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="m12 19-7-7 7-7" /><path d="M19 12H5" />
-                </svg>
-              </Link>
-              <h2 className="text-xl font-semibold text-slate-800 tracking-tight truncate">{devoir.titre}</h2>
-            </div>
-            <span className={`px-3 py-1 rounded-full text-xs font-medium ${soumission.corrige ? 'bg-green-100 text-green-800' : 'bg-blue-100 text-blue-800'}`}>
-              {soumission.corrige ? 'Corrigé' : 'Soumis'}
-            </span>
-          </div>
+        <header className="bg-white border-b border-slate-200 h-16 flex items-center pl-14 pr-4 md:px-8 shadow-sm z-10">
+          <Link
+            href="/eleve/devoirs"
+            className="flex-shrink-0 p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-lg transition-colors"
+            title="Retour"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="m12 19-7-7 7-7" /><path d="M19 12H5" />
+            </svg>
+          </Link>
+          <h2 className="text-xl font-semibold text-slate-800 tracking-tight truncate flex-1 text-center">{devoir.titre}</h2>
+          <span className={`flex-shrink-0 px-3 py-1 rounded-full text-xs font-medium ${soumission.corrige ? 'bg-green-100 text-green-800' : 'bg-blue-100 text-blue-800'}`}>
+            {soumission.corrige ? 'Corrigé' : 'Soumis'}
+          </span>
         </header>
 
         <main className="flex-1 overflow-y-auto bg-slate-50 p-4 sm:p-8">

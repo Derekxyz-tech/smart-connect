@@ -75,20 +75,19 @@ export default function DevoirDetailPage() {
     <div className="h-screen flex overflow-hidden bg-slate-50">
       <Sidebar user={user} />
       <div className="flex-1 flex flex-col overflow-hidden">
-        <header className="bg-white border-b border-slate-200 h-16 flex items-center justify-between pl-14 pr-4 md:px-8 shadow-sm z-10">
-          <div className="flex items-center gap-3">
-            <Link
-              href="/prof/devoirs"
-              className="p-2 text-slate-500 hover:text-slate-700 hover:bg-slate-100 rounded-lg transition-colors"
-              title="Retour aux devoirs"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="m12 19-7-7 7-7"></path>
-                <path d="M19 12H5"></path>
-              </svg>
-            </Link>
-            <h2 className="text-xl font-semibold text-slate-800">Détails du devoir</h2>
-          </div>
+        <header className="bg-white border-b border-slate-200 h-16 flex items-center pl-14 pr-4 md:px-8 shadow-sm z-10">
+          <Link
+            href="/prof/devoirs"
+            className="flex-shrink-0 p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-lg transition-colors"
+            title="Retour aux devoirs"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="m12 19-7-7 7-7"></path>
+              <path d="M19 12H5"></path>
+            </svg>
+          </Link>
+          <h2 className="text-xl font-semibold text-slate-800 tracking-tight truncate flex-1 text-center">Détails du devoir</h2>
+          <div className="w-9"></div>
         </header>
 
         <main className="flex-1 overflow-y-auto p-4 sm:p-8">
