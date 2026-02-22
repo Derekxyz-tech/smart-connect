@@ -464,43 +464,22 @@ export default function SoumettreDevoirPage() {
             {devoir.fichiers_joints && devoir.fichiers_joints.length > 0 && (
               <div className="bg-white rounded-xl border border-slate-200 shadow-sm p-6">
                 <h3 className="text-lg font-semibold text-slate-800 mb-4">Pièces jointes du professeur</h3>
-                <div className="space-y-3">
+                <div className="flex flex-wrap gap-2">
                   {devoir.fichiers_joints.map((fichier, idx) => {
                     const isUrl = typeof fichier === 'string' && fichier.startsWith('http')
-                    const label = isUrl ? decodeURIComponent(fichier.split('/').pop() || 'Fichier') : fichier
                     return (
-                      <div key={idx} className="flex items-center justify-between p-4 bg-slate-50 rounded-lg border border-slate-200">
-                        <div className="flex items-center gap-3">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            className="text-blue-600"
-                          >
-                            <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path>
-                            <path d="M14 2v4a2 2 0 0 0 2 2h4M10 9H8M16 13H8M16 17H8"></path>
-                          </svg>
-                          <span className="text-sm font-medium text-slate-700 truncate">{label}</span>
-                        </div>
-                        {isUrl ? (
-                          <a
-                            href={fichier}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="px-5 py-2.5 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-xl hover:from-blue-700 hover:to-blue-800 transition-all duration-200 shadow-md hover:shadow-lg text-sm font-semibold"
-                          >
-                            Ouvrir / Télécharger
-                          </a>
-                        ) : (
-                          <span className="text-xs text-slate-400">Fichier non disponible</span>
-                        )}
-                      </div>
+                      <a
+                        key={idx}
+                        href={isUrl ? fichier : '#'}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 px-4 py-2.5 text-sm font-medium text-blue-600 bg-blue-50 hover:bg-blue-100 rounded-lg transition-colors"
+                      >
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+                        </svg>
+                        Fichier {devoir.fichiers_joints!.length > 1 ? idx + 1 : 'joint'}
+                      </a>
                     )
                   })}
                 </div>
@@ -820,25 +799,18 @@ export default function SoumettreDevoirPage() {
                     <p className="text-sm font-medium text-slate-700 mb-2">Fichier(s) soumis:</p>
                     <div className="space-y-2">
                       {getFichierUrls(soumission.fichier_url).map((url, i) => (
-                        <div key={i} className="flex items-center gap-3 p-4 bg-slate-50 rounded-lg border-2 border-slate-200">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            className="text-blue-600 shrink-0"
-                          >
-                            <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path>
-                            <path d="M14 2v4a2 2 0 0 0 2 2h4M10 9H8M16 13H8M16 17H8"></path>
+                        <a
+                          key={i}
+                          href={url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-2 p-3 bg-blue-50 hover:bg-blue-100 rounded-lg border border-blue-200 transition-colors"
+                        >
+                          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-blue-600 shrink-0">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
                           </svg>
-                          <span className="text-sm font-medium text-slate-700 flex-1 truncate">{url.split('/').pop() || 'Fichier'}</span>
-                          <a href={url} target="_blank" rel="noopener noreferrer" download={url.split('/').pop() || undefined} className="text-blue-600 hover:underline text-sm">Télécharger</a>
-                        </div>
+                          <span className="text-sm font-medium text-blue-600">Télécharger le fichier{getFichierUrls(soumission.fichier_url).length > 1 ? ` ${i + 1}` : ''}</span>
+                        </a>
                       ))}
                     </div>
                   </div>

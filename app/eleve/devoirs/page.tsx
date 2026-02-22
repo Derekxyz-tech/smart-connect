@@ -170,39 +170,11 @@ export default async function DevoirsPage() {
                       </div>
 
                       {devoir.fichiers_joints && devoir.fichiers_joints.length > 0 && (
-                        <div className="mb-4 flex flex-wrap gap-2">
-                          {devoir.fichiers_joints.map((fichier: string, idx: number) => {
-                            const isUrl = typeof fichier === 'string' && fichier.startsWith('http')
-                            const label = isUrl ? decodeURIComponent(fichier.split('/').pop() || 'Fichier') : fichier
-                            return (
-                              <span
-                                key={idx}
-                                className={`inline-flex items-center gap-1 px-2 py-1 rounded text-xs ${isUrl ? 'bg-blue-50 text-blue-700' : 'bg-slate-100 text-slate-600'}`}
-                              >
-                                <svg
-                                  xmlns="http://www.w3.org/2000/svg"
-                                  width="12"
-                                  height="12"
-                                  viewBox="0 0 24 24"
-                                  fill="none"
-                                  stroke="currentColor"
-                                  strokeWidth="2"
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                >
-                                  <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path>
-                                  <path d="M14 2v4a2 2 0 0 0 2 2h4M10 9H8M16 13H8M16 17H8"></path>
-                                </svg>
-                                {isUrl ? (
-                                  <a href={fichier} target="_blank" rel="noopener noreferrer" className="hover:underline">
-                                    {label}
-                                  </a>
-                                ) : (
-                                  label
-                                )}
-                              </span>
-                            )
-                          })}
+                        <div className="mb-4 flex items-center gap-2 text-xs text-slate-500">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"></path>
+                          </svg>
+                          <span>{devoir.fichiers_joints.length} pièce{devoir.fichiers_joints.length > 1 ? 's' : ''} jointe{devoir.fichiers_joints.length > 1 ? 's' : ''}</span>
                         </div>
                       )}
 

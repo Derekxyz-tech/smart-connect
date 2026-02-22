@@ -68,7 +68,8 @@ export default function Sidebar({ user }: SidebarProps) {
     { href: '/prof/quiz', label: 'Quiz & Évaluations', icon: 'clipboard-check' },
     { href: '/prof/correction', label: 'Correction & Notes', icon: 'check-circle' },
     { href: '/prof/avis', label: 'Avis', icon: 'megaphone' },
-    { href: '/prof/programme-annee', label: 'Dates importantes', icon: 'calendar-check' },
+    { href: '/prof/dates-importantes', label: 'Dates importantes', icon: 'calendar-days' },
+    { href: '/prof/programme-annee', label: 'Programme de l\'année', icon: 'calendar-check' },
   ]
 
   const eleveLinks = [

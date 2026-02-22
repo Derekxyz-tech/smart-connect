@@ -130,26 +130,25 @@ export default function DevoirDetailPage() {
               {devoir.fichiers_joints && devoir.fichiers_joints.length > 0 && (
                 <div className="p-6 border-b border-slate-200">
                   <h3 className="text-sm font-semibold text-slate-700 mb-2">Fichiers joints</h3>
-                  <ul className="space-y-1">
+                  <div className="flex flex-wrap gap-2">
                     {devoir.fichiers_joints.map((item: string, i: number) => {
                       const isUrl = typeof item === 'string' && item.startsWith('http')
-                      const label = isUrl ? decodeURIComponent(item.split('/').pop() || 'Fichier') : item
                       return (
-                        <li key={i} className="flex items-center gap-2 text-sm text-slate-600">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-slate-400 shrink-0">
-                            <path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"></path>
+                        <a
+                          key={i}
+                          href={isUrl ? item : '#'}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-blue-600 bg-blue-50 hover:bg-blue-100 rounded-lg transition-colors"
+                        >
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
                           </svg>
-                          {isUrl ? (
-                            <a href={item} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline truncate">
-                              {label}
-                            </a>
-                          ) : (
-                            label
-                          )}
-                        </li>
+                          Fichier {devoir.fichiers_joints!.length > 1 ? i + 1 : 'joint'}
+                        </a>
                       )
                     })}
-                  </ul>
+                  </div>
                 </div>
               )}
 

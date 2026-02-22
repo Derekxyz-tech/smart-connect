@@ -159,25 +159,22 @@ export default function DevoirDetailPage() {
             {devoir.fichiers_joints && devoir.fichiers_joints.length > 0 && (
               <div className="bg-white rounded-xl border border-slate-200 shadow-sm p-6">
                 <h3 className="text-lg font-semibold text-slate-800 mb-3">Pièces jointes du professeur</h3>
-                <ul className="space-y-2">
+                <div className="flex flex-wrap gap-2">
                   {devoir.fichiers_joints.map((f, i) => (
-                    <li key={i} className="flex items-center gap-2 text-sm text-slate-700">
-                      <span className="text-slate-400">•</span>
-                      {typeof f === 'string' && f.startsWith('http') ? (
-                        <a
-                          href={f}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-blue-600 hover:underline"
-                        >
-                          {decodeURIComponent(f.split('/').pop() || 'Ouvrir le fichier')}
-                        </a>
-                      ) : (
-                        f
-                      )}
-                    </li>
+                    <a
+                      key={i}
+                      href={typeof f === 'string' && f.startsWith('http') ? f : '#'}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-blue-600 bg-blue-50 hover:bg-blue-100 rounded-lg transition-colors"
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+                      </svg>
+                      Fichier {devoir.fichiers_joints!.length > 1 ? i + 1 : 'joint'}
+                    </a>
                   ))}
-                </ul>
+                </div>
               </div>
             )}
 
@@ -187,15 +184,22 @@ export default function DevoirDetailPage() {
               {getFichierUrls(soumission.fichier_url).length > 0 && (
                 <div>
                   <p className="text-xs text-slate-500 mb-1">Fichier(s) soumis</p>
-                  <ul className="space-y-1">
+                  <div className="flex flex-wrap gap-2">
                     {getFichierUrls(soumission.fichier_url).map((url: string, i: number) => (
-                      <li key={i}>
-                        <a href={url} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline text-sm">
-                          {url.split('/').pop()}
-                        </a>
-                      </li>
+                      <a
+                        key={i}
+                        href={url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-blue-600 bg-blue-50 hover:bg-blue-100 rounded-lg transition-colors"
+                      >
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+                        </svg>
+                        Télécharger{getFichierUrls(soumission.fichier_url).length > 1 ? ` ${i + 1}` : ''}
+                      </a>
                     ))}
-                  </ul>
+                  </div>
                 </div>
               )}
               {soumission.contenu && (

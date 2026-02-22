@@ -345,33 +345,18 @@ function CorrectionContent() {
                         Soumis le {dateFormatted(selectedSoumission.submitted_at)}
                       </div>
                       {getFichierUrls(selectedSoumission.fichier_url).map((url, i) => (
-                        <div key={i} className="flex items-center gap-1.5">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="16"
-                            height="16"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          >
-                            <path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"></path>
+                        <a
+                          key={i}
+                          href={url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-blue-600 hover:text-blue-700 bg-blue-50 hover:bg-blue-100 rounded-lg transition-colors"
+                        >
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
                           </svg>
-                          <span className="text-slate-600">
-                            {url.split('/').pop() || 'Fichier joint'}
-                          </span>
-                          <a
-                            href={url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            download={url.split('/').pop() || undefined}
-                            className="text-blue-600 hover:text-blue-700 font-medium"
-                          >
-                            Télécharger
-                          </a>
-                        </div>
+                          Fichier {getFichierUrls(selectedSoumission.fichier_url).length > 1 ? i + 1 : 'joint'}
+                        </a>
                       ))}
                     </div>
                   </div>
