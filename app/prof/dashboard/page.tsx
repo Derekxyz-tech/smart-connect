@@ -282,7 +282,7 @@ export default async function ProfDashboard() {
                 </div>
               </Link>
 
-              <Link href="/prof/programme-annee" className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
+              <Link href="/prof/dates-importantes" className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
                 <div className="flex items-center gap-4">
                   <div className="flex-shrink-0 bg-indigo-50 text-indigo-600 p-3 rounded-lg">
                     <svg

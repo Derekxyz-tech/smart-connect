@@ -214,12 +214,25 @@ export default function EvaluationQuizPage() {
                 ) : (
                   <p className="mt-4 text-amber-700 font-medium">En attente de correction par le professeur.</p>
                 )}
+                {reponse?.commentaire && (
+                  <div className="mt-4 pt-4 border-t border-slate-200">
+                    <p className="text-sm font-medium text-slate-600">Commentaire du professeur</p>
+                    <p className="mt-1 text-slate-700 whitespace-pre-wrap bg-slate-50 rounded-lg p-3">{reponse.commentaire}</p>
+                  </div>
+                )}
               </div>
               {questions.map((q, index) => {
                 const rep = reponses[index]
                 const repStr = rep === true ? 'Vrai' : rep === false ? 'Faux' : (typeof rep === 'string' ? rep : '—')
+                const correct = q.reponse_correcte
+                const isCorrect = q.type === 'qcm'
+                  ? String(rep) === String(correct)
+                  : q.type === 'vrai_faux'
+                    ? (correct === true || correct === 'true') === (rep === true || rep === 'true')
+                    : null
+                const correctStr = correct === true ? 'Vrai' : correct === false ? 'Faux' : (typeof correct === 'string' ? correct : '—')
                 return (
-                  <div key={index} className="bg-white rounded-xl border border-slate-200 shadow-sm p-6">
+                  <div key={index} className={`bg-white rounded-xl border shadow-sm p-6 ${isCorrect === true ? 'border-green-300' : isCorrect === false ? 'border-red-300' : 'border-slate-200'}`}>
                     <p className="font-medium text-slate-800 mb-2">
                       {index + 1}. {q.texte}
                       {q.points ? <span className="text-slate-500 text-sm ml-2">({q.points} pt{q.points > 1 ? 's' : ''})</span> : null}
@@ -231,6 +244,21 @@ export default function EvaluationQuizPage() {
                         <p><strong>Votre réponse :</strong> {repStr}</p>
                       )}
                     </div>
+                    {q.type !== 'ouverte' && isCorrect !== null && (
+                      <div className={`mt-3 flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium ${isCorrect ? 'bg-green-50 text-green-800' : 'bg-red-50 text-red-800'}`}>
+                        {isCorrect ? (
+                          <>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+                            Correct
+                          </>
+                        ) : (
+                          <>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg>
+                            Incorrect. La bonne réponse était : <span className="font-semibold">{correctStr}</span>
+                          </>
+                        )}
+                      </div>
+                    )}
                   </div>
                 )
               })}

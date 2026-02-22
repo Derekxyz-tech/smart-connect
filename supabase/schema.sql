@@ -78,6 +78,7 @@ CREATE TABLE IF NOT EXISTS reponses_quiz (
   corrige BOOLEAN DEFAULT false,
   submitted_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
   corrected_at TIMESTAMP WITH TIME ZONE,
+  commentaire TEXT,
   UNIQUE(quiz_id, eleve_id)
 );
 

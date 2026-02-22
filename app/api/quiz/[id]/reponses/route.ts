@@ -14,7 +14,7 @@ export async function PATCH(
   }
 
   const body = await request.json()
-  const { eleve_id, note } = body
+  const { eleve_id, note, commentaire } = body
 
   if (!eleve_id) {
     return NextResponse.json({ error: 'eleve_id requis' }, { status: 400 })
@@ -63,6 +63,9 @@ export async function PATCH(
   if (note !== undefined && note !== null) {
     const n = Number(note)
     if (!Number.isNaN(n)) updateData.note = n
+  }
+  if (commentaire !== undefined) {
+    updateData.commentaire = typeof commentaire === 'string' ? commentaire : null
   }
 
   const { data, error } = await supabase

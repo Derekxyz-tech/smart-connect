@@ -19,6 +19,7 @@ interface Reponse {
   reponses: Record<string, unknown>
   note: number | null
   corrige: boolean
+  commentaire?: string | null
   submitted_at: string
   corrected_at: string | null
   eleve?: { nom?: string; prenom?: string }
@@ -34,6 +35,7 @@ export default function QuizResultatsPage() {
   const [reponses, setReponses] = useState<Reponse[]>([])
   const [loading, setLoading] = useState(true)
   const [noteInputs, setNoteInputs] = useState<Record<string, string>>({})
+  const [commentInputs, setCommentInputs] = useState<Record<string, string>>({})
   const [savingId, setSavingId] = useState<string | null>(null)
   const { user: contextUser, loading: authLoading } = useUser()
 
@@ -54,11 +56,14 @@ export default function QuizResultatsPage() {
       }
       setQuiz(data.quiz)
       setReponses(data.reponses || [])
-      const initial: Record<string, string> = {}
+      const initialNotes: Record<string, string> = {}
+      const initialComments: Record<string, string> = {}
       ;(data.reponses || []).forEach((r: Reponse) => {
-        initial[r.eleve_id] = r.note != null ? String(r.note) : ''
+        initialNotes[r.eleve_id] = r.note != null ? String(r.note) : ''
+        initialComments[r.eleve_id] = r.commentaire ?? ''
       })
-      setNoteInputs(initial)
+      setNoteInputs(initialNotes)
+      setCommentInputs(initialComments)
     } catch {
       router.push('/prof/quiz')
     } finally {
@@ -71,11 +76,12 @@ export default function QuizResultatsPage() {
     const note = raw === '' || raw === undefined ? null : parseFloat(raw)
     if (note !== null && (Number.isNaN(note) || note < 0)) return
     setSavingId(eleveId)
+    const commentaire = commentInputs[eleveId]?.trim() || null
     try {
       const res = await fetch(`/api/quiz/${quizId}/reponses`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ eleve_id: eleveId, note }),
+        body: JSON.stringify({ eleve_id: eleveId, note, commentaire }),
       })
       if (!res.ok) {
         const d = await res.json()
@@ -83,7 +89,7 @@ export default function QuizResultatsPage() {
         return
       }
       const data = await res.json()
-      setReponses(prev => prev.map(r => r.eleve_id === eleveId ? { ...r, note: data.reponse?.note ?? r.note, corrige: true } : r))
+      setReponses(prev => prev.map(r => r.eleve_id === eleveId ? { ...r, note: data.reponse?.note ?? r.note, commentaire: data.reponse?.commentaire ?? commentaire, corrige: true } : r))
     } finally {
       setSavingId(null)
     }
@@ -191,6 +197,28 @@ export default function QuizResultatsPage() {
                           {r.corrige && <span className="text-xs text-green-600 font-medium">Corrigé</span>}
                         </div>
                       </div>
+                      {/* Commentaire (note manuelle) : champ ou affichage */}
+                      {!allAutoGraded && (
+                        <div className="px-6 pt-2 pb-3 border-t border-slate-100 mt-2">
+                          {alreadyGraded && r.commentaire ? (
+                            <div className="text-sm">
+                              <span className="font-medium text-slate-600">Commentaire :</span>
+                              <p className="text-slate-700 mt-1 whitespace-pre-wrap bg-slate-50 rounded-lg p-3">{r.commentaire}</p>
+                            </div>
+                          ) : !alreadyGraded ? (
+                            <div>
+                              <label className="block text-sm font-medium text-slate-600 mb-1">Commentaire (optionnel)</label>
+                              <textarea
+                                value={commentInputs[r.eleve_id] ?? ''}
+                                onChange={e => setCommentInputs(prev => ({ ...prev, [r.eleve_id]: e.target.value }))}
+                                placeholder="Commentaire pour l'élève..."
+                                rows={2}
+                                className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                              />
+                            </div>
+                          ) : null}
+                        </div>
+                      )}
                     </div>
                     <div className="p-6 space-y-4">
                       {quiz.questions.map((q, index) => {

@@ -37,6 +37,7 @@ export async function GET(
       reponses,
       note,
       corrige,
+      commentaire,
       submitted_at,
       corrected_at,
       eleve:users!reponses_quiz_eleve_id_fkey(nom, prenom)
