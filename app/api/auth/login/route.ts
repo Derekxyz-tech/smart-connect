@@ -34,7 +34,7 @@ export async function POST(request: NextRequest) {
     try {
       const result = await supabase
         .from('users')
-        .select('id, nom, role, code_login, password_hash, actif')
+        .select('id, nom, role, code_login, password_hash, actif, raison_blocage')
         .eq('code_login', cleanedCode)
         .single()
       
@@ -88,8 +88,14 @@ export async function POST(request: NextRequest) {
 
     // Vérifier si le compte est actif
     if (!user.actif) {
+      const raison = (user as { raison_blocage?: string | null }).raison_blocage?.trim() || null
       return NextResponse.json(
-        { error: 'Compte désactivé. Contactez l\'administrateur.' },
+        {
+          error: raison
+            ? 'Compte bloqué.'
+            : 'Compte désactivé. Contactez l\'administrateur.',
+          raison_blocage: raison,
+        },
         { status: 403 }
       )
     }

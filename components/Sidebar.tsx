@@ -1,6 +1,5 @@
 'use client'
 
-import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 
@@ -252,14 +251,16 @@ export default function Sidebar({ user }: SidebarProps) {
 
       <aside
         className={`
-          flex-shrink-0 bg-slate-900 text-slate-400 flex flex-col transition-all duration-300 ease-in-out
+          flex-shrink-0 bg-slate-900 text-slate-400 flex flex-col min-h-0 transition-all duration-300 ease-in-out
           fixed inset-y-0 left-0 z-50 w-64 transform
           md:relative md:inset-auto md:z-auto md:transform-none
           ${isOpen ? 'translate-x-0 md:w-64' : '-translate-x-full md:translate-x-0 md:w-0 md:min-w-0 md:overflow-hidden'}
         `}
       >
+        {/* Contenu scrollable entier (nom, email, liens, déconnexion) pour écrans courts */}
+        <div className="flex-1 min-h-0 flex flex-col overflow-y-auto overflow-x-hidden no-scrollbar">
         {/* Header */}
-        <div className="pt-8 pb-6 px-4 border-b border-slate-800 relative">
+        <div className="pt-8 pb-6 px-4 border-b border-slate-800 relative flex-shrink-0">
           {/* Bouton fermer / collapse */}
           <button
             type="button"
@@ -321,7 +322,7 @@ export default function Sidebar({ user }: SidebarProps) {
 
       {/* Informations de Contact - Admin et Prof */}
       {(userData.role === 'admin' || userData.role === 'prof') && (
-        <div className="px-6 py-4 border-b border-slate-800">
+        <div className="px-6 py-4 border-b border-slate-800 flex-shrink-0">
           <div className="space-y-3">
             {userData.role === 'admin' ? (
               <>
@@ -405,45 +406,50 @@ export default function Sidebar({ user }: SidebarProps) {
         </div>
       )}
 
-      {/* Navigation */}
-      <nav className="flex-1 overflow-y-auto no-scrollbar py-4 px-3 space-y-1">
+      {/* Navigation — un tap = navigation (évite double-clic sur mobile) */}
+      <nav className="flex-1 min-h-0 py-4 px-3 space-y-1 flex-shrink-0">
         {links.map((link) => {
           const isActive = pathname === link.href
           return (
-            <Link
+            <button
               key={link.href}
-              href={link.href}
-              onClick={closeSidebar}
-              className={`group flex items-center py-2.5 text-sm font-medium rounded-md transition-colors ${
+              type="button"
+              onClick={() => {
+                closeSidebar()
+                router.push(link.href)
+              }}
+              className={`group w-full flex items-center py-3 text-sm font-medium rounded-md transition-colors touch-manipulation min-h-[44px] ${
                 isActive
                   ? 'bg-slate-800 text-white'
-                  : 'hover:text-white hover:bg-slate-800'
-              } px-3`}
+                  : 'hover:text-white hover:bg-slate-800 active:bg-slate-700'
+              } px-3 text-left`}
             >
-              <span className={`mr-3 ${isActive ? 'text-blue-400' : 'group-hover:text-blue-400'}`}>
+              <span className={`mr-3 flex-shrink-0 ${isActive ? 'text-blue-400' : 'group-hover:text-blue-400'}`}>
                 {renderIcon(link.icon)}
               </span>
               <span className="truncate">{link.label}</span>
-            </Link>
+            </button>
           )
         })}
       </nav>
 
       {/* Classe élève en bas */}
       {userData.role === 'eleve' && userData.classe && (
-        <div className="px-6 py-3 border-t border-slate-800 text-xs text-slate-400 flex items-center justify-between">
+        <div className="px-6 py-3 border-t border-slate-800 text-xs text-slate-400 flex items-center justify-between flex-shrink-0">
           <span>Classe</span>
           <span className="font-semibold text-slate-200">{userData.classe}</span>
         </div>
       )}
 
-      {/* Logout */}
-      <div className="px-6 py-4 border-t border-slate-800">
+      {/* Logout — libellé Déconnexion + icône à droite, zone tactile adaptée mobile */}
+      <div className="px-4 py-4 border-t border-slate-800 flex-shrink-0">
         <button
+          type="button"
           onClick={handleLogout}
-          className="w-full flex items-center justify-center py-2.5 px-4 rounded-md text-red-400 hover:text-red-300 hover:bg-red-900/20 transition-colors border border-red-400/30 hover:border-red-400/50"
+          className="w-full flex items-center justify-between py-3.5 px-4 rounded-md text-red-400 hover:text-red-300 hover:bg-red-900/20 active:bg-red-900/30 transition-colors border border-red-400/30 hover:border-red-400/50 touch-manipulation min-h-[48px]"
           title="Déconnexion"
         >
+          <span className="font-medium text-sm">Déconnexion</span>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="20"
@@ -454,11 +460,13 @@ export default function Sidebar({ user }: SidebarProps) {
             strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
+            className="flex-shrink-0 ml-2"
           >
             <path d="m16 17l5-5l-5-5m5 5H9m0 9H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
           </svg>
         </button>
       </div>
+        </div>
     </aside>
     </>
   )

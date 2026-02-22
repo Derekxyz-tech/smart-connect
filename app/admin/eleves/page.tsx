@@ -88,9 +88,10 @@ export default function ElevesPage() {
 
   const handleConfirmBlock = async () => {
     if (!selectedEleve) return
+    const raison = [blockReason, blockComment].filter(Boolean).join(' — ')
     try {
       setSavingBlock(true)
-      await toggleActif(selectedEleve.id, selectedEleve.actif)
+      await toggleActif(selectedEleve.id, selectedEleve.actif, raison)
       setBlockModalOpen(false)
       setSelectedEleve(null)
       setBlockComment('')
@@ -157,12 +158,19 @@ export default function ElevesPage() {
     }
   }
 
-  const toggleActif = async (id: string, actif: boolean) => {
+  const toggleActif = async (id: string, actif: boolean, raisonBlocage?: string) => {
     try {
+      const newActif = !actif
+      const payload: { actif: boolean; raison_blocage?: string | null } = { actif: newActif }
+      if (newActif) {
+        payload.raison_blocage = null
+      } else if (raisonBlocage != null) {
+        payload.raison_blocage = raisonBlocage.trim() || null
+      }
       const res = await fetch(`/api/users/${id}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ actif: !actif }),
+        body: JSON.stringify(payload),
       })
       if (res.ok) {
         loadEleves()
@@ -254,7 +262,7 @@ export default function ElevesPage() {
                               </button>
                             ) : (
                               <button
-                                onClick={() => toggleActif(eleve.id, eleve.actif)}
+                                onClick={() => toggleActif(eleve.id, eleve.actif, undefined)}
                                 className="px-3 py-1.5 text-sm font-medium text-green-600 bg-green-50 rounded-lg hover:bg-green-100 transition-colors"
                               >
                                 Débloquer

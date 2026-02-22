@@ -25,6 +25,12 @@ export default function ProfesseursPage() {
   const [selectedProf, setSelectedProf] = useState<Prof | null>(null)
   const [infoModalOpen, setInfoModalOpen] = useState(false)
 
+  const [blockModalOpen, setBlockModalOpen] = useState(false)
+  const [profToBlock, setProfToBlock] = useState<Prof | null>(null)
+  const [blockReason, setBlockReason] = useState('Comportement inapproprié')
+  const [blockComment, setBlockComment] = useState('')
+  const [savingBlock, setSavingBlock] = useState(false)
+
   // Info modal states
   const [email, setEmail] = useState('')
   const [currentPassword, setCurrentPassword] = useState<string | null>(null)
@@ -249,12 +255,48 @@ export default function ProfesseursPage() {
     }
   }
 
-  const toggleActif = async (id: string, actif: boolean) => {
+  const openBlockModal = (prof: Prof) => {
+    setProfToBlock(prof)
+    setBlockReason('Comportement inapproprié')
+    setBlockComment('')
+    setBlockModalOpen(true)
+  }
+
+  const closeBlockModal = () => {
+    if (!savingBlock) {
+      setBlockModalOpen(false)
+      setProfToBlock(null)
+      setBlockComment('')
+    }
+  }
+
+  const handleConfirmBlock = async () => {
+    if (!profToBlock) return
+    const raison = [blockReason, blockComment].filter(Boolean).join(' — ')
     try {
+      setSavingBlock(true)
+      await toggleActif(profToBlock.id, profToBlock.actif, raison)
+      setBlockModalOpen(false)
+      setProfToBlock(null)
+      setBlockComment('')
+    } finally {
+      setSavingBlock(false)
+    }
+  }
+
+  const toggleActif = async (id: string, actif: boolean, raisonBlocage?: string) => {
+    try {
+      const newActif = !actif
+      const payload: { actif: boolean; raison_blocage?: string | null } = { actif: newActif }
+      if (newActif) {
+        payload.raison_blocage = null
+      } else if (raisonBlocage != null) {
+        payload.raison_blocage = raisonBlocage.trim() || null
+      }
       const res = await fetch(`/api/users/${id}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ actif: !actif }),
+        body: JSON.stringify(payload),
       })
       if (res.ok) {
         loadProfs()
@@ -337,16 +379,21 @@ export default function ProfesseursPage() {
                             {new Date(prof.created_at).toLocaleDateString('fr-FR')}
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap text-sm" onClick={(e) => e.stopPropagation()}>
-                            <button
-                              onClick={() => toggleActif(prof.id, prof.actif)}
-                              className={`${
-                                prof.actif
-                                  ? 'text-red-600 hover:text-red-800'
-                                  : 'text-green-600 hover:text-green-800'
-                              } font-medium`}
-                            >
-                              {prof.actif ? 'Bloquer' : 'Débloquer'}
-                            </button>
+                            {prof.actif ? (
+                              <button
+                                onClick={() => openBlockModal(prof)}
+                                className="px-3 py-1.5 text-sm font-medium text-red-600 bg-red-50 rounded-lg hover:bg-red-100 transition-colors"
+                              >
+                                Bloquer
+                              </button>
+                            ) : (
+                              <button
+                                onClick={() => toggleActif(prof.id, prof.actif, undefined)}
+                                className="px-3 py-1.5 text-sm font-medium text-green-600 bg-green-50 rounded-lg hover:bg-green-100 transition-colors"
+                              >
+                                Débloquer
+                              </button>
+                            )}
                           </td>
                         </tr>
                       ))}
@@ -607,6 +654,57 @@ export default function ProfesseursPage() {
                   className="w-full px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {savingMatieresClasses ? 'Sauvegarde...' : 'Sauvegarder les modifications'}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Modal Bloquer Professeur */}
+      {blockModalOpen && profToBlock && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-xl shadow-xl max-w-md w-full">
+            <div className="p-6 border-b border-slate-200">
+              <div className="flex items-center justify-between">
+                <h3 className="text-xl font-semibold text-slate-800">Bloquer un professeur</h3>
+                <button onClick={closeBlockModal} className="text-slate-400 hover:text-slate-600" aria-label="Fermer">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                </button>
+              </div>
+            </div>
+            <div className="p-6 space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-slate-700 mb-2">Motif du blocage *</label>
+                <select
+                  value={blockReason}
+                  onChange={(e) => setBlockReason(e.target.value)}
+                  className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                >
+                  <option>Comportement inapproprié</option>
+                  <option>Fin de contrat</option>
+                  <option>Autre raison</option>
+                </select>
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-slate-700 mb-2">Commentaire (optionnel)</label>
+                <textarea
+                  rows={3}
+                  value={blockComment}
+                  onChange={(e) => setBlockComment(e.target.value)}
+                  placeholder="Ajouter un commentaire..."
+                  className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+              <div className="bg-amber-50 border border-amber-200 rounded-lg p-3">
+                <p className="text-sm text-amber-800">
+                  <strong>Attention :</strong> Le professeur perdra l&apos;accès à la plateforme. La raison sera affichée lors de sa tentative de connexion.
+                </p>
+              </div>
+              <div className="flex items-center justify-end gap-3 pt-4 border-t border-slate-200">
+                <button onClick={closeBlockModal} className="px-4 py-2 text-sm font-medium text-slate-700 bg-slate-100 rounded-lg hover:bg-slate-200 transition-colors" disabled={savingBlock}>Annuler</button>
+                <button onClick={handleConfirmBlock} className="px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-lg hover:bg-red-700 transition-colors disabled:opacity-70 disabled:cursor-not-allowed" disabled={savingBlock}>
+                  {savingBlock ? 'Blocage en cours...' : 'Confirmer le blocage'}
                 </button>
               </div>
             </div>

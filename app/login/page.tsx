@@ -38,7 +38,10 @@ function LoginContent() {
       const data = await res.json()
 
       if (!res.ok) {
-        setError(data.error || 'Erreur de connexion')
+        const msg = data.raison_blocage
+          ? `${data.error || 'Compte bloqué.'}\n\nRaison : ${data.raison_blocage}`
+          : (data.error || 'Erreur de connexion')
+        setError(msg)
         setLoading(false)
         return
       }
@@ -212,7 +215,7 @@ function LoginContent() {
               </div>
 
               {error && (
-                <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm">
+                <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm whitespace-pre-wrap break-words">
                   {error}
                 </div>
               )}

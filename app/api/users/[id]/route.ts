@@ -23,11 +23,16 @@ export async function PATCH(
     delete body.password
   }
 
+  // Lors du déblocage (actif: true), effacer la raison de blocage
+  if (body.actif === true) {
+    body.raison_blocage = null
+  }
+
   const { data, error } = await supabase
     .from('users')
     .update(body)
     .eq('id', params.id)
-    .select('id, nom, prenom, email, role, code_login, actif, created_at')
+    .select('id, nom, prenom, email, role, code_login, actif, raison_blocage, created_at')
     .single()
 
   if (error) {
@@ -50,10 +55,10 @@ export async function DELETE(
 
   const supabase = getSupabaseAdmin()
 
-  // Ne pas supprimer, juste désactiver
+  // Ne pas supprimer, juste désactiver (sans raison spécifique)
   const { error } = await supabase
     .from('users')
-    .update({ actif: false })
+    .update({ actif: false, raison_blocage: 'Compte désactivé par l\'administrateur.' })
     .eq('id', params.id)
 
   if (error) {
