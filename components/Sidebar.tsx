@@ -251,14 +251,17 @@ export default function Sidebar({ user }: SidebarProps) {
 
       <aside
         className={`
-          flex-shrink-0 bg-slate-900 text-slate-400 flex flex-col min-h-0 transition-all duration-300 ease-in-out
+          flex-shrink-0 bg-slate-900 text-slate-400 flex flex-col h-screen max-h-screen overflow-hidden transition-all duration-300 ease-in-out
           fixed inset-y-0 left-0 z-50 w-64 transform
-          md:relative md:inset-auto md:z-auto md:transform-none
+          md:relative md:inset-auto md:z-auto md:transform-none md:h-full
           ${isOpen ? 'translate-x-0 md:w-64' : '-translate-x-full md:translate-x-0 md:w-0 md:min-w-0 md:overflow-hidden'}
         `}
       >
         {/* Contenu scrollable entier (nom, email, liens, déconnexion) pour écrans courts */}
-        <div className="flex-1 min-h-0 flex flex-col overflow-y-auto overflow-x-hidden no-scrollbar">
+        <div
+          className="flex-1 min-h-0 overflow-y-auto overflow-x-hidden no-scrollbar overscroll-contain"
+          style={{ WebkitOverflowScrolling: 'touch' } as React.CSSProperties}
+        >
         {/* Header */}
         <div className="pt-8 pb-6 px-4 border-b border-slate-800 relative flex-shrink-0">
           {/* Bouton fermer / collapse */}

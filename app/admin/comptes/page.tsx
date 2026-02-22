@@ -147,12 +147,12 @@ export default function CreateAccountsPage() {
           <h2 className="text-xl font-semibold text-slate-800 tracking-tight truncate">Création de Comptes</h2>
         </header>
 
-        <main className="flex-1 overflow-y-auto bg-slate-50 p-4 sm:p-8 pb-24 sm:pb-8">
+        <main className="flex-1 overflow-y-auto bg-slate-50 p-4 sm:p-8 pb-32 sm:pb-8">
           <div className="max-w-4xl mx-auto space-y-6">
             {/* Formulaire de création */}
             <div className="bg-white border border-slate-200 rounded-xl shadow-sm p-6">
               <h3 className="text-lg font-semibold text-slate-800 mb-6">Nouveau compte</h3>
-              <form id="create-account-form" onSubmit={handleSubmit} className="space-y-6">
+              <form onSubmit={handleSubmit} className="space-y-6">
                 {/* Type de compte */}
                 <div>
                   <label className="block text-sm font-medium text-slate-700 mb-2">
@@ -458,8 +458,7 @@ export default function CreateAccountsPage() {
                   </div>
                 )}
 
-                {/* Bouton masqué dans le flux pour soumettre le formulaire (utilisé par la barre sticky) */}
-                <div className="hidden sm:flex items-center justify-end gap-3 pt-4 border-t border-slate-200">
+                <div className="flex items-center justify-end gap-3 pt-4 border-t border-slate-200">
                   <button
                     type="submit"
                     disabled={loading}
@@ -504,18 +503,6 @@ export default function CreateAccountsPage() {
                 )}
           </div>
         </main>
-
-        {/* Barre fixe en bas sur mobile pour le bouton "Générer le compte" — toujours visible au scroll */}
-        <div className="sm:hidden fixed bottom-0 left-0 right-0 z-20 bg-white border-t border-slate-200 p-4 pb-[max(1rem,env(safe-area-inset-bottom))]">
-          <button
-            type="submit"
-            form="create-account-form"
-            disabled={loading}
-            className="w-full py-3.5 text-base font-medium text-white bg-blue-600 rounded-xl hover:bg-blue-700 active:bg-blue-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed touch-manipulation"
-          >
-            {loading ? 'Création...' : 'Générer le compte'}
-          </button>
-        </div>
       </div>
     </div>
   )
