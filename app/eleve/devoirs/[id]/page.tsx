@@ -119,7 +119,7 @@ export default function DevoirDetailPage() {
         </header>
 
         <main className="flex-1 overflow-y-auto bg-slate-50 p-4 sm:p-8">
-          <div className="max-w-4xl mx-auto space-y-6">
+          <div className="max-w-4xl mx-auto space-y-6 overflow-hidden">
             {/* Informations du devoir */}
             <div className="bg-white rounded-xl border border-slate-200 shadow-sm p-6">
               <h3 className="text-lg font-semibold text-slate-800 mb-4">Informations</h3>

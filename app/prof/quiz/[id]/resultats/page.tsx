@@ -105,6 +105,8 @@ export default function QuizResultatsPage() {
   }
 
   const bareme = quiz.bareme ?? 20
+  const hasOpenQuestions = quiz.questions.some(q => q.type === 'ouverte')
+  const allAutoGraded = !hasOpenQuestions
 
   return (
     <div className="h-screen flex overflow-hidden bg-slate-50">
@@ -127,67 +129,98 @@ export default function QuizResultatsPage() {
 
         <main className="flex-1 overflow-y-auto p-4 sm:p-8">
           <div className="max-w-4xl mx-auto space-y-8">
+            {allAutoGraded && (
+              <div className="bg-blue-50 border border-blue-200 rounded-xl px-4 py-3 text-sm text-blue-800 flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+                Ce quiz ne contient que des QCM et Vrai/Faux. Les notes sont calculées automatiquement.
+              </div>
+            )}
             {reponses.length === 0 ? (
               <div className="bg-white rounded-xl border border-slate-200 p-8 text-center text-slate-500">
                 Aucune réponse soumise pour ce quiz.
               </div>
             ) : (
-              reponses.map((r) => (
-                <div key={r.id} className="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
-                  <div className="px-6 py-4 bg-slate-50 border-b border-slate-200 flex flex-wrap items-center justify-between gap-4">
-                    <div>
-                      <span className="font-medium text-slate-800">
-                        {(r.eleve as any)?.prenom} {(r.eleve as any)?.nom}
-                      </span>
-                      <span className="text-slate-500 text-sm ml-2">
-                        soumis le {new Date(r.submitted_at).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit' })}
-                      </span>
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <label className="text-sm text-slate-600">
-                        Note / {bareme} :
-                        <input
-                          type="number"
-                          min={0}
-                          max={bareme}
-                          step={0.5}
-                          value={noteInputs[r.eleve_id] ?? (r.note != null ? String(r.note) : '')}
-                          onChange={e => setNoteInputs(prev => ({ ...prev, [r.eleve_id]: e.target.value }))}
-                          className="ml-2 w-20 px-2 py-1 border border-slate-300 rounded text-sm"
-                        />
-                      </label>
-                      <button
-                        type="button"
-                        onClick={() => handleSaveNote(r.eleve_id)}
-                        disabled={savingId === r.eleve_id}
-                        className="px-4 py-1.5 bg-blue-600 text-white text-sm rounded-lg hover:bg-blue-700 disabled:opacity-50"
-                      >
-                        {savingId === r.eleve_id ? 'Enregistrement...' : 'Enregistrer'}
-                      </button>
-                      {r.corrige && <span className="text-xs text-green-600 font-medium">Corrigé</span>}
-                    </div>
-                  </div>
-                  <div className="p-6 space-y-4">
-                    {quiz.questions.map((q, index) => {
-                      const rep = (r.reponses || {})[String(index)]
-                      return (
-                        <div key={index} className="border-b border-slate-100 pb-4 last:border-0">
-                          <p className="font-medium text-slate-800 mb-1">
-                            {index + 1}. {q.texte}
-                            {q.points != null ? <span className="text-slate-500 text-sm ml-2">({q.points} pt)</span> : null}
-                          </p>
-                          <div className="bg-slate-50 rounded-lg px-3 py-2 text-slate-700 text-sm">
-                            <strong>Réponse de l&apos;élève :</strong> {formatRep(rep)}
-                          </div>
-                          {q.type === 'ouverte' && (
-                            <p className="text-amber-700 text-xs mt-1">Question ouverte — attribuez la note ci-dessus (total ou partie) selon le barème.</p>
-                          )}
+              reponses.map((r) => {
+                const alreadyGraded = r.corrige && r.note != null
+                return (
+                  <div key={r.id} className="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+                    <div className="px-6 py-4 bg-slate-50 border-b border-slate-200">
+                      <div className="flex flex-wrap items-center justify-between gap-3">
+                        <div className="min-w-0">
+                          <span className="font-medium text-slate-800">
+                            {(r.eleve as any)?.prenom} {(r.eleve as any)?.nom}
+                          </span>
+                          <span className="text-slate-500 text-sm ml-2">
+                            soumis le {new Date(r.submitted_at).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit' })}
+                          </span>
                         </div>
-                      )
-                    })}
+                        <div className="flex items-center gap-3">
+                          {allAutoGraded ? (
+                            <span className="text-sm font-medium text-slate-700">
+                              Note : <span className="text-green-600 font-bold">{r.note != null ? r.note : '—'}</span> / {bareme}
+                            </span>
+                          ) : alreadyGraded ? (
+                            <span className="text-sm font-medium text-slate-700">
+                              Note : <span className="text-green-600 font-bold">{r.note}</span> / {bareme}
+                              <span className="ml-2 text-xs text-slate-400">(définitive)</span>
+                            </span>
+                          ) : (
+                            <>
+                              <label className="text-sm text-slate-600">
+                                Note / {bareme} :
+                                <input
+                                  type="number"
+                                  min={0}
+                                  max={bareme}
+                                  step={0.5}
+                                  value={noteInputs[r.eleve_id] ?? ''}
+                                  onChange={e => setNoteInputs(prev => ({ ...prev, [r.eleve_id]: e.target.value }))}
+                                  className="ml-2 w-20 px-2 py-1 border border-slate-300 rounded text-sm"
+                                />
+                              </label>
+                              <button
+                                type="button"
+                                onClick={() => handleSaveNote(r.eleve_id)}
+                                disabled={savingId === r.eleve_id}
+                                className="px-4 py-1.5 bg-blue-600 text-white text-sm rounded-lg hover:bg-blue-700 disabled:opacity-50"
+                              >
+                                {savingId === r.eleve_id ? '...' : 'Enregistrer'}
+                              </button>
+                            </>
+                          )}
+                          {r.corrige && <span className="text-xs text-green-600 font-medium">Corrigé</span>}
+                        </div>
+                      </div>
+                    </div>
+                    <div className="p-6 space-y-4">
+                      {quiz.questions.map((q, index) => {
+                        const rep = (r.reponses || {})[String(index)]
+                        const isAuto = q.type === 'qcm' || q.type === 'vrai_faux'
+                        return (
+                          <div key={index} className="border-b border-slate-100 pb-4 last:border-0">
+                            <p className="font-medium text-slate-800 mb-1">
+                              {index + 1}. {q.texte}
+                              {q.points != null ? <span className="text-slate-500 text-sm ml-2">({q.points} pt)</span> : null}
+                            </p>
+                            <div className="bg-slate-50 rounded-lg px-3 py-2 text-slate-700 text-sm">
+                              <strong>Réponse :</strong> {formatRep(rep)}
+                            </div>
+                            {isAuto && (
+                              <p className="text-green-700 text-xs mt-1 flex items-center gap-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+                                Correction automatique ({q.type === 'qcm' ? 'QCM' : 'Vrai/Faux'})
+                              </p>
+                            )}
+                            {q.type === 'ouverte' && !alreadyGraded && (
+                              <p className="text-amber-700 text-xs mt-1">Question ouverte — attribuez la note ci-dessus selon le barème.</p>
+                            )}
+                          </div>
+                        )
+                      })}
+                    </div>
                   </div>
-                </div>
-              ))
+                )
+              })
             )}
           </div>
         </main>

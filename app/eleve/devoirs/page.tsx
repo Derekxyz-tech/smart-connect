@@ -130,11 +130,11 @@ export default async function DevoirsPage() {
                   return (
                     <div
                       key={devoir.id}
-                      className="bg-white rounded-xl border border-slate-200 shadow-sm p-6 hover:shadow-md transition-shadow"
+                      className="bg-white rounded-xl border border-slate-200 shadow-sm p-6 hover:shadow-md transition-shadow overflow-hidden"
                     >
-                      <div className="flex items-start justify-between mb-4">
-                        <div className="flex-1">
-                          <h3 className="text-lg font-semibold text-slate-800 mb-2">{devoir.titre}</h3>
+                      <div className="flex items-start justify-between gap-3 mb-4">
+                        <div className="flex-1 min-w-0">
+                          <h3 className="text-lg font-semibold text-slate-800 mb-2 break-words">{devoir.titre}</h3>
                           {devoir.description && (
                             <p className="text-sm text-slate-600 line-clamp-2 mb-3 break-words">{devoir.description}</p>
                           )}

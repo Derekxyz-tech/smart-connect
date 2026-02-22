@@ -24,12 +24,36 @@ export async function PATCH(
 
   const { data: quiz } = await supabase
     .from('quiz')
-    .select('prof_id')
+    .select('prof_id, questions')
     .eq('id', params.id)
     .single()
 
   if (!quiz || quiz.prof_id !== user.id) {
     return NextResponse.json({ error: 'Quiz non trouvé ou non autorisé' }, { status: 404 })
+  }
+
+  const questions = (() => {
+    const raw = quiz.questions as any
+    if (Array.isArray(raw)) return raw
+    if (raw?.questions && Array.isArray(raw.questions)) return raw.questions
+    return []
+  })()
+
+  const hasOpenQuestions = questions.some((q: any) => (q?.type || q?.question_type) === 'ouverte')
+
+  if (!hasOpenQuestions) {
+    return NextResponse.json({ error: 'Ce quiz est corrigé automatiquement. La note ne peut pas être modifiée manuellement.' }, { status: 403 })
+  }
+
+  const { data: existingResponse } = await supabase
+    .from('reponses_quiz')
+    .select('corrige, note')
+    .eq('quiz_id', params.id)
+    .eq('eleve_id', eleve_id)
+    .single()
+
+  if (existingResponse?.corrige && existingResponse?.note != null) {
+    return NextResponse.json({ error: 'Cette réponse a déjà été notée. La note ne peut pas être modifiée.' }, { status: 403 })
   }
 
   const updateData: Record<string, unknown> = {
