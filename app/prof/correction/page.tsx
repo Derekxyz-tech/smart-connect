@@ -302,48 +302,41 @@ function CorrectionContent() {
                 </div>
 
                 {/* Titre et statut */}
-                <div className="flex items-start justify-between mb-6">
-                  <div className="flex-1">
-                    <h2 className="text-2xl font-bold text-slate-900 mb-2">
+                <div className="mb-6">
+                  <div className="flex items-start justify-between gap-3 mb-3">
+                    <h2 className="text-xl sm:text-2xl font-bold text-slate-900">
                       {selectedSoumission.devoir.titre}
                     </h2>
-                    <div className="flex items-center gap-4 text-sm text-slate-600">
-                      <div className="flex items-center gap-1.5">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="16"
-                          height="16"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        >
-                          <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
-                          <circle cx="9" cy="7" r="4"></circle>
-                        </svg>
-                        {formatNomComplet(selectedSoumission.eleve.nom, selectedSoumission.eleve.prenom)}
-                      </div>
-                      <div className="flex items-center gap-1.5">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="16"
-                          height="16"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        >
-                          <rect width="18" height="18" x="3" y="4" rx="2" ry="2"></rect>
-                          <line x1="16" y1="2" x2="16" y2="6"></line>
-                          <line x1="8" y1="2" x2="8" y2="6"></line>
-                          <line x1="3" y1="10" x2="21" y2="10"></line>
-                        </svg>
-                        Soumis le {dateFormatted(selectedSoumission.submitted_at)}
-                      </div>
+                    <span
+                      className={`flex-shrink-0 px-3 py-1 rounded-full text-xs font-medium ${
+                        selectedSoumission.corrige
+                          ? 'bg-green-100 text-green-700'
+                          : 'bg-orange-100 text-orange-700'
+                      }`}
+                    >
+                      {selectedSoumission.corrige ? 'Corrigé' : 'À corriger'}
+                    </span>
+                  </div>
+                  <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-slate-600 mb-2">
+                    <div className="flex items-center gap-1.5">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="9" cy="7" r="4"></circle>
+                      </svg>
+                      {formatNomComplet(selectedSoumission.eleve.nom, selectedSoumission.eleve.prenom)}
+                    </div>
+                    <div className="flex items-center gap-1.5">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <rect width="18" height="18" x="3" y="4" rx="2" ry="2"></rect>
+                        <line x1="16" y1="2" x2="16" y2="6"></line>
+                        <line x1="8" y1="2" x2="8" y2="6"></line>
+                        <line x1="3" y1="10" x2="21" y2="10"></line>
+                      </svg>
+                      Soumis le {dateFormatted(selectedSoumission.submitted_at)}
+                    </div>
+                  </div>
+                  {getFichierUrls(selectedSoumission.fichier_url).length > 0 && (
+                    <div className="flex flex-wrap gap-2">
                       {getFichierUrls(selectedSoumission.fichier_url).map((url, i) => (
                         <a
                           key={i}
@@ -359,16 +352,7 @@ function CorrectionContent() {
                         </a>
                       ))}
                     </div>
-                  </div>
-                  <span
-                    className={`px-3 py-1 rounded-full text-xs font-medium ${
-                      selectedSoumission.corrige
-                        ? 'bg-green-100 text-green-700'
-                        : 'bg-orange-100 text-orange-700'
-                    }`}
-                  >
-                    {selectedSoumission.corrige ? 'Corrigé' : 'À corriger'}
-                  </span>
+                  )}
                 </div>
 
                 {/* Contenu de la soumission */}
