@@ -154,7 +154,7 @@ export default function CorrectionPage() {
       const updated = soumissions.find(s => s.id === selectedSoumission.id)
       if (updated) {
         updated.note = parseFloat(note)
-        updated.commentaire = commentaire.trim() || null
+        updated.commentaire = commentaire.trim() || undefined
         updated.corrige = true
         updated.corrected_at = new Date().toISOString()
         setSelectedSoumission(updated)
