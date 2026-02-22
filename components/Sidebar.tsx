@@ -257,10 +257,13 @@ export default function Sidebar({ user }: SidebarProps) {
           ${isOpen ? 'translate-x-0 md:w-64' : '-translate-x-full md:translate-x-0 md:w-0 md:min-w-0 md:overflow-hidden'}
         `}
       >
-        {/* Contenu scrollable entier (nom, email, liens, déconnexion) pour écrans courts */}
+        {/* Contenu scrollable entier (nom, email, liens, déconnexion) — padding bas pour pouvoir scroller jusqu'au bouton Déconnexion */}
         <div
           className="flex-1 min-h-0 overflow-y-auto overflow-x-hidden no-scrollbar overscroll-contain"
-          style={{ WebkitOverflowScrolling: 'touch' } as React.CSSProperties}
+          style={{
+            WebkitOverflowScrolling: 'touch',
+            paddingBottom: 'max(3rem, env(safe-area-inset-bottom, 0px))',
+          } as React.CSSProperties}
         >
         {/* Header */}
         <div className="pt-8 pb-6 px-4 border-b border-slate-800 relative flex-shrink-0">
