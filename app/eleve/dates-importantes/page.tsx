@@ -139,7 +139,7 @@ export default async function DatesImportantesPage() {
                             </span>
                           </div>
                           {date.description && (
-                            <p className="text-slate-700 whitespace-pre-wrap">{date.description}</p>
+                            <p className="text-slate-700 whitespace-pre-wrap break-words">{date.description}</p>
                           )}
                         </div>
                       </div>

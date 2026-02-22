@@ -401,7 +401,7 @@ function CorrectionContent() {
                 {/* Contenu de la soumission */}
                 {selectedSoumission.contenu && (
                   <div className="mb-6 p-4 bg-slate-50 rounded-lg border border-slate-200">
-                    <p className="text-sm text-slate-700 whitespace-pre-wrap">{selectedSoumission.contenu}</p>
+                    <p className="text-sm text-slate-700 whitespace-pre-wrap break-words">{selectedSoumission.contenu}</p>
                   </div>
                 )}
 
@@ -422,7 +422,7 @@ function CorrectionContent() {
                     {selectedSoumission.commentaire && (
                       <div className="p-4 bg-slate-50 rounded-lg border border-slate-200">
                         <p className="text-sm font-medium text-slate-700 mb-1">Commentaire:</p>
-                        <p className="text-sm text-slate-600 whitespace-pre-wrap">
+                        <p className="text-sm text-slate-600 whitespace-pre-wrap break-words">
                           {selectedSoumission.commentaire}
                         </p>
                       </div>

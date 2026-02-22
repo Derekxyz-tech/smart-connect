@@ -153,7 +153,7 @@ export default function DevoirDetailPage() {
             {devoir.description && (
               <div className="bg-white rounded-xl border border-slate-200 shadow-sm p-6">
                 <h3 className="text-lg font-semibold text-slate-800 mb-3">Instructions du devoir</h3>
-                <div className="prose prose-sm max-w-none text-slate-700 whitespace-pre-wrap bg-slate-50 p-4 rounded-lg border border-slate-200">
+                <div className="prose prose-sm max-w-none text-slate-700 whitespace-pre-wrap break-words bg-slate-50 p-4 rounded-lg border border-slate-200">
                   {devoir.description}
                 </div>
               </div>
@@ -205,7 +205,7 @@ export default function DevoirDetailPage() {
               {soumission.contenu && (
                 <div>
                   <p className="text-xs text-slate-500 mb-1">Réponse</p>
-                  <div className="p-4 bg-slate-50 rounded-lg border border-slate-200 text-slate-700 whitespace-pre-wrap text-sm">
+                  <div className="p-4 bg-slate-50 rounded-lg border border-slate-200 text-slate-700 whitespace-pre-wrap break-words text-sm">
                     {soumission.contenu}
                   </div>
                 </div>
@@ -226,7 +226,7 @@ export default function DevoirDetailPage() {
                 {soumission.commentaire && (
                   <div className="p-4 bg-blue-50 rounded-lg border border-blue-100">
                     <p className="text-sm font-medium text-blue-900 mb-2">Commentaire du professeur</p>
-                    <p className="text-sm text-blue-800 whitespace-pre-wrap">{soumission.commentaire}</p>
+                    <p className="text-sm text-blue-800 whitespace-pre-wrap break-words">{soumission.commentaire}</p>
                   </div>
                 )}
               </div>

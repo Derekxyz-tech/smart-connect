@@ -136,7 +136,7 @@ export default async function DevoirsPage() {
                         <div className="flex-1">
                           <h3 className="text-lg font-semibold text-slate-800 mb-2">{devoir.titre}</h3>
                           {devoir.description && (
-                            <p className="text-sm text-slate-600 line-clamp-2 mb-3">{devoir.description}</p>
+                            <p className="text-sm text-slate-600 line-clamp-2 mb-3 break-words">{devoir.description}</p>
                           )}
                           <div className="flex flex-wrap items-center gap-4 text-sm text-slate-500">
                             <span>{devoir.matiere}</span>

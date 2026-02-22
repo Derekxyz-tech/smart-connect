@@ -248,7 +248,7 @@ export default function AvisPage() {
                               </span>
                             )}
                           </div>
-                          <p className="text-sm text-slate-600 mb-2">{a.contenu}</p>
+                          <p className="text-sm text-slate-600 mb-2 break-words">{a.contenu}</p>
                           <div className="flex items-center gap-4 text-xs text-slate-500">
                             <span>Publié le {formatDate(a.created_at)}</span>
                             <span>•</span>

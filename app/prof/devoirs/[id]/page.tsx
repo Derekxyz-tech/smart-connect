@@ -117,7 +117,7 @@ export default function DevoirDetailPage() {
               {devoir.description && (
                 <div className="p-6 border-b border-slate-200">
                   <h3 className="text-sm font-semibold text-slate-700 mb-2">Instructions</h3>
-                  <p className="text-slate-600 whitespace-pre-wrap">{devoir.description}</p>
+                  <p className="text-slate-600 whitespace-pre-wrap break-words">{devoir.description}</p>
                 </div>
               )}
 

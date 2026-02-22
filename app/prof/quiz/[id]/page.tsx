@@ -218,7 +218,7 @@ export default function QuizDetailPage() {
               {quiz.description && (
                 <div className="mb-6">
                   <h2 className="text-lg font-semibold text-slate-800 mb-3">Description</h2>
-                  <p className="text-slate-600 leading-relaxed">{quiz.description}</p>
+                  <p className="text-slate-600 leading-relaxed break-words">{quiz.description}</p>
                 </div>
               )}
 
@@ -260,7 +260,7 @@ export default function QuizDetailPage() {
                         </div>
                       </div>
                       
-                      <p className="text-slate-800 font-medium mb-4">{question.texte}</p>
+                      <p className="text-slate-800 font-medium mb-4 break-words">{question.texte}</p>
                       
                       {question.type === 'qcm' && question.options && (
                         <div className="space-y-2">

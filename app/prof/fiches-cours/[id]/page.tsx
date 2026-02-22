@@ -151,7 +151,7 @@ export default function FicheCoursDetailPage() {
               {cours.description && (
                 <div className="mb-6">
                   <h2 className="text-lg font-semibold text-slate-800 mb-3">Description</h2>
-                  <p className="text-slate-600 leading-relaxed">{cours.description}</p>
+                  <p className="text-slate-600 leading-relaxed break-words">{cours.description}</p>
                 </div>
               )}
 
@@ -159,7 +159,7 @@ export default function FicheCoursDetailPage() {
                 <div>
                   <h2 className="text-lg font-semibold text-slate-800 mb-4">Contenu</h2>
                   <div className="prose max-w-none">
-                    <div className="text-slate-700 whitespace-pre-wrap leading-relaxed">
+                    <div className="text-slate-700 whitespace-pre-wrap leading-relaxed break-words">
                       {cours.contenu}
                     </div>
                   </div>

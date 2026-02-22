@@ -212,7 +212,7 @@ export default function EvaluationQuizPage() {
                     </p>
                     <div className="bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-slate-700">
                       {q.type === 'ouverte' ? (
-                        <p className="whitespace-pre-wrap">{repStr || '—'}</p>
+                        <p className="whitespace-pre-wrap break-words">{repStr || '—'}</p>
                       ) : (
                         <p><strong>Votre réponse :</strong> {repStr}</p>
                       )}

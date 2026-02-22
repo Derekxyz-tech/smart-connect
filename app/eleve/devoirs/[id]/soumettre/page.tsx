@@ -390,7 +390,7 @@ export default function SoumettreDevoirPage() {
                 {soumission.commentaire && (
                   <div className="bg-blue-50 rounded-lg border-2 border-blue-100 p-6 text-left">
                     <p className="text-sm font-semibold text-blue-900 mb-2">Commentaire du professeur:</p>
-                    <p className="text-sm text-blue-800 whitespace-pre-wrap">{soumission.commentaire}</p>
+                    <p className="text-sm text-blue-800 whitespace-pre-wrap break-words">{soumission.commentaire}</p>
                   </div>
                 )}
 
@@ -488,7 +488,7 @@ export default function SoumettreDevoirPage() {
             {devoir.description && (
               <div className="bg-white rounded-xl border border-slate-200 shadow-sm p-6">
                 <h3 className="text-lg font-semibold text-slate-800 mb-4">Instructions du devoir</h3>
-                <div className="prose prose-sm max-w-none text-slate-700 whitespace-pre-wrap leading-relaxed bg-slate-50 p-6 rounded-lg border border-slate-200">
+                <div className="prose prose-sm max-w-none text-slate-700 whitespace-pre-wrap break-words leading-relaxed bg-slate-50 p-6 rounded-lg border border-slate-200">
                   {devoir.description}
                 </div>
               </div>
@@ -882,7 +882,7 @@ export default function SoumettreDevoirPage() {
                   <div className="mb-4">
                     <p className="text-sm font-medium text-slate-700 mb-2">Réponse soumise:</p>
                     <div className="p-4 bg-slate-50 rounded-lg border-2 border-slate-200">
-                      <p className="text-sm text-slate-700 whitespace-pre-wrap leading-relaxed">{soumission.contenu}</p>
+                      <p className="text-sm text-slate-700 whitespace-pre-wrap break-words leading-relaxed">{soumission.contenu}</p>
                     </div>
                   </div>
                 )}

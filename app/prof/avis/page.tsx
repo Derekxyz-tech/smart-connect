@@ -75,7 +75,7 @@ export default async function AvisPage() {
 
                       <h3 className="text-xl font-semibold text-slate-800 mb-3">{avisItem.titre}</h3>
 
-                      <div className="prose max-w-none text-slate-700 whitespace-pre-wrap mb-4">
+                      <div className="prose max-w-none text-slate-700 whitespace-pre-wrap break-words mb-4">
                         {avisItem.contenu}
                       </div>
 

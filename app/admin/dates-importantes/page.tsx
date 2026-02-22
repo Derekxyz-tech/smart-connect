@@ -303,7 +303,7 @@ export default function DatesImportantesPage() {
                             <div className="flex-1">
                               <h4 className="font-semibold text-slate-800 mb-1">{event.titre}</h4>
                               {event.description && (
-                                <p className="text-sm text-slate-600 mb-2">{event.description}</p>
+                                <p className="text-sm text-slate-600 mb-2 break-words">{event.description}</p>
                               )}
                               <div className="flex items-center gap-4 text-xs text-slate-500">
                                 {formatTime(event.date_debut) && (

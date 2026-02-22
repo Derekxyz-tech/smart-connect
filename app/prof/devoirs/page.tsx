@@ -474,7 +474,7 @@ export default function DevoirsPage() {
 
                       {/* Description */}
                       {d.description && (
-                        <p className="text-sm text-slate-600 mb-4">{d.description}</p>
+                        <p className="text-sm text-slate-600 mb-4 break-words">{d.description}</p>
                       )}
 
                       {/* Détails */}

@@ -79,7 +79,6 @@ export default function Sidebar({ user }: SidebarProps) {
     { href: '/eleve/avis', label: 'Avis importants', icon: 'megaphone' },
     { href: '/eleve/dates-importantes', label: 'Dates Importantes', icon: 'calendar-days' },
     { href: '/eleve/programme-annee', label: 'Programme de l\'année', icon: 'calendar-check' },
-    { href: '/eleve/carnet', label: 'Carnet', icon: 'book-open' },
   ]
 
   const links = userData.role === 'admin' ? adminLinks : userData.role === 'prof' ? profLinks : eleveLinks

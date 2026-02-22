@@ -176,7 +176,7 @@ export default async function FicheCoursDetailPage({ params }: { params: { id: s
               {cours.description && (
                 <div className="mb-6">
                   <h3 className="text-lg font-semibold text-slate-800 mb-2">Description</h3>
-                  <p className="text-slate-700 whitespace-pre-wrap">{cours.description}</p>
+                  <p className="text-slate-700 whitespace-pre-wrap break-words">{cours.description}</p>
                 </div>
               )}
 
@@ -184,7 +184,7 @@ export default async function FicheCoursDetailPage({ params }: { params: { id: s
               {cours.contenu && (
                 <div className="mb-6">
                   <h3 className="text-lg font-semibold text-slate-800 mb-2">Contenu</h3>
-                  <div className="prose max-w-none text-slate-700 whitespace-pre-wrap">{cours.contenu}</div>
+                  <div className="prose max-w-none text-slate-700 whitespace-pre-wrap break-words">{cours.contenu}</div>
                 </div>
               )}
 
