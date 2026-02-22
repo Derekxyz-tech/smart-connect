@@ -27,6 +27,7 @@ export interface SessionPayload {
   userId: string
   role: string
   code_login: string
+  [key: string]: unknown
 }
 
 // Créer une session JWT

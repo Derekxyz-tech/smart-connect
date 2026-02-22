@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import Sidebar from '@/components/Sidebar'
@@ -31,7 +31,7 @@ interface Soumission {
   corrected_at?: string
 }
 
-export default function CorrectionPage() {
+function CorrectionContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const [user, setUser] = useState<any>(null)
@@ -601,5 +601,13 @@ export default function CorrectionPage() {
         </main>
       </div>
     </div>
+  )
+}
+
+export default function CorrectionPage() {
+  return (
+    <Suspense>
+      <CorrectionContent />
+    </Suspense>
   )
 }

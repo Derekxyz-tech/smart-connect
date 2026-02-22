@@ -59,7 +59,6 @@ export default function Sidebar({ user }: SidebarProps) {
     { href: '/admin/avis', label: 'Avis', icon: 'megaphone' },
     { href: '/admin/dates-importantes', label: 'Dates importantes', icon: 'calendar-days' },
     { href: '/admin/programme-annee', label: 'Programme de l\'année', icon: 'calendar-check' },
-    { href: '/admin/parametres', label: 'Paramètres', icon: 'settings' },
   ]
 
   const profLinks = [
@@ -70,7 +69,6 @@ export default function Sidebar({ user }: SidebarProps) {
     { href: '/prof/correction', label: 'Correction & Notes', icon: 'check-circle' },
     { href: '/prof/avis', label: 'Avis', icon: 'megaphone' },
     { href: '/prof/programme-annee', label: 'Dates importantes', icon: 'calendar-check' },
-    { href: '/prof/parametres', label: 'Paramètres', icon: 'settings' },
   ]
 
   const eleveLinks = [
@@ -82,7 +80,6 @@ export default function Sidebar({ user }: SidebarProps) {
     { href: '/eleve/dates-importantes', label: 'Dates Importantes', icon: 'calendar-days' },
     { href: '/eleve/programme-annee', label: 'Programme de l\'année', icon: 'calendar-check' },
     { href: '/eleve/carnet', label: 'Carnet', icon: 'book-open' },
-    { href: '/eleve/parametres', label: 'Paramètres', icon: 'settings' },
   ]
 
   const links = userData.role === 'admin' ? adminLinks : userData.role === 'prof' ? profLinks : eleveLinks

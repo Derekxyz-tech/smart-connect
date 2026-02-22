@@ -29,13 +29,12 @@ export async function GET(request: NextRequest) {
     })
   } else if (user.role === 'prof') {
     // Stats prof
-    const [fichesCours, devoirs, devoirsSoumis, quiz, aCorriger, messages] = await Promise.all([
+    const [fichesCours, devoirs, devoirsSoumis, quiz, aCorriger] = await Promise.all([
       supabase.from('cours').select('id', { count: 'exact' }).eq('prof_id', user.id),
       supabase.from('devoirs').select('id', { count: 'exact' }).eq('prof_id', user.id),
       supabase.from('soumissions').select('id', { count: 'exact' }).eq('corrige', false),
       supabase.from('quiz').select('id', { count: 'exact' }).eq('prof_id', user.id),
       supabase.from('soumissions').select('id', { count: 'exact' }).eq('corrige', false),
-      supabase.from('messages').select('id', { count: 'exact' }).eq('destinataire_id', user.id).eq('lu', false),
     ])
 
     return NextResponse.json({
@@ -44,7 +43,6 @@ export async function GET(request: NextRequest) {
       devoirsSoumis: devoirsSoumis.count || 0,
       quiz: quiz.count || 0,
       aCorriger: aCorriger.count || 0,
-      messages: messages.count || 0,
     })
   } else if (user.role === 'eleve') {
     // Stats élève
