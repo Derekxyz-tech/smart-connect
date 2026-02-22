@@ -104,7 +104,7 @@ export default function DevoirSoumissionsPage() {
             {devoir && (
               <>
                 <div className="bg-white rounded-xl border border-slate-200 shadow-sm p-6 mb-6">
-                  <h1 className="text-2xl font-bold text-slate-900 mb-1">{devoir.titre}</h1>
+                  <h1 className="text-xl font-bold text-slate-900 mb-1 break-words">{devoir.titre}</h1>
                   <p className="text-sm text-slate-500">
                     {devoir.matiere}
                     {devoir.classe && ` • ${devoir.classe}`}

@@ -82,7 +82,7 @@ export default async function FicheCoursDetailPage({ params }: { params: { id: s
                   <path d="M19 12H5"></path>
                 </svg>
               </Link>
-              <h2 className="text-2xl font-semibold text-slate-800">Fiche de Cours</h2>
+              <h2 className="text-xl font-semibold text-slate-800 truncate">Fiche de Cours</h2>
             </div>
           </div>
         </header>
@@ -91,7 +91,7 @@ export default async function FicheCoursDetailPage({ params }: { params: { id: s
           <div className="max-w-4xl mx-auto">
             <div className="bg-white rounded-xl border border-slate-200 shadow-sm p-8">
               {/* Titre */}
-              <h1 className="text-3xl font-bold text-slate-800 mb-6">{cours.titre}</h1>
+              <h1 className="text-xl sm:text-2xl font-bold text-slate-800 mb-6 break-words">{cours.titre}</h1>
 
               {/* Métadonnées */}
               <div className="flex flex-wrap gap-4 mb-6 pb-6 border-b border-slate-200">

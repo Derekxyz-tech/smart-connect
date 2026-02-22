@@ -276,10 +276,10 @@ export default function DevoirsPage() {
       <div className="flex-1 flex flex-col overflow-hidden">
         <header className="bg-white border-b border-slate-200 pl-14 pr-4 md:px-8 py-6 shadow-sm z-10">
           <div className="flex items-center justify-between mb-6">
-            <h1 className="text-3xl font-bold text-slate-900">Devoirs</h1>
+            <h1 className="text-xl font-semibold text-slate-800 tracking-tight truncate">Devoirs</h1>
             <button
               onClick={() => setModalOpen(true)}
-              className="px-4 py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2 font-medium"
+              className="flex-shrink-0 px-3 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2 font-medium text-sm"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -294,7 +294,7 @@ export default function DevoirsPage() {
               >
                 <path d="M5 12h14m-7-7v14"></path>
               </svg>
-              Nouveau devoir
+              <span className="hidden sm:inline">Nouveau devoir</span>
             </button>
           </div>
 

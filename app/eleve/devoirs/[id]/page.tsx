@@ -114,7 +114,7 @@ export default function DevoirDetailPage() {
                   <path d="m12 19-7-7 7-7" /><path d="M19 12H5" />
                 </svg>
               </Link>
-              <h2 className="text-2xl font-semibold text-slate-800 tracking-tight">{devoir.titre}</h2>
+              <h2 className="text-xl font-semibold text-slate-800 tracking-tight truncate">{devoir.titre}</h2>
             </div>
             <span className={`px-3 py-1 rounded-full text-xs font-medium ${soumission.corrige ? 'bg-green-100 text-green-800' : 'bg-blue-100 text-blue-800'}`}>
               {soumission.corrige ? 'Corrigé' : 'Soumis'}

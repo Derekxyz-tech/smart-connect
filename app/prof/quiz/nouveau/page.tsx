@@ -259,7 +259,7 @@ export default function NouveauQuizPage() {
       <div className="flex-1 flex flex-col overflow-hidden">
         <header className="bg-white border-b border-slate-200 pl-14 pr-4 md:px-8 py-6 shadow-sm z-10">
           <div className="flex items-center justify-between">
-            <h1 className="text-3xl font-bold text-slate-900">Nouveau Quiz</h1>
+            <h1 className="text-xl font-semibold text-slate-800 tracking-tight truncate">Nouveau Quiz</h1>
             <button
               onClick={() => router.push('/prof/quiz')}
               className="p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-lg transition-colors"

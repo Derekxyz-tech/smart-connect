@@ -353,7 +353,7 @@ export default function SoumettreDevoirPage() {
                     <path d="M19 12H5"></path>
                   </svg>
                 </Link>
-                <h2 className="text-2xl font-semibold text-slate-800 tracking-tight">
+                <h2 className="text-xl font-semibold text-slate-800 tracking-tight truncate">
                   {devoir.titre}
                 </h2>
               </div>
@@ -438,7 +438,7 @@ export default function SoumettreDevoirPage() {
                 </svg>
               </Link>
               <div>
-                <h2 className="text-2xl font-semibold text-slate-800 tracking-tight">
+                <h2 className="text-xl font-semibold text-slate-800 tracking-tight truncate">
                   {devoir.titre}
                 </h2>
                 <div className="flex items-center gap-3 mt-1">

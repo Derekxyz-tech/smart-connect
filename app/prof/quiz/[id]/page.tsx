@@ -137,7 +137,7 @@ export default function QuizDetailPage() {
                 </svg>
               </Link>
               <div>
-                <h1 className="text-2xl font-bold text-slate-900">{quiz.titre}</h1>
+                <h1 className="text-xl font-bold text-slate-900 truncate">{quiz.titre}</h1>
                 <div className="flex items-center gap-4 mt-2 text-sm text-slate-600">
                   <span className="flex items-center gap-1.5">
                     <svg

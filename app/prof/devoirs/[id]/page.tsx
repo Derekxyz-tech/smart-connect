@@ -95,7 +95,7 @@ export default function DevoirDetailPage() {
           <div className="max-w-3xl mx-auto">
             <div className="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
               <div className="p-6 border-b border-slate-200">
-                <h1 className="text-2xl font-bold text-slate-900 mb-2">{devoir.titre}</h1>
+                <h1 className="text-xl font-bold text-slate-900 mb-2 break-words">{devoir.titre}</h1>
                 <div className="flex flex-wrap items-center gap-4 text-sm text-slate-600">
                   <span className="font-medium text-slate-700">{devoir.matiere}</span>
                   {devoir.classe && <span>{devoir.classe}</span>}

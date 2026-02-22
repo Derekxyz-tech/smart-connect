@@ -99,7 +99,7 @@ export default function FicheCoursDetailPage() {
                 </svg>
               </Link>
               <div>
-                <h1 className="text-2xl font-bold text-slate-900">{cours.titre}</h1>
+                <h1 className="text-xl font-bold text-slate-900 truncate">{cours.titre}</h1>
                 <div className="flex items-center gap-4 mt-2 text-sm text-slate-600">
                   <span className="flex items-center gap-1.5">
                     <svg
